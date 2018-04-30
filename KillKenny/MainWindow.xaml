@@ -91,9 +91,9 @@
                 </EventTrigger>
             </Canvas.Triggers>
             <!-- GUN AND CARTMAN -->
-            <Ellipse Visibility="Hidden"  x:Name="ellForFork" Canvas.Bottom="33" Panel.ZIndex="25" Canvas.Left="70"
+            <Ellipse Visibility="Hidden" x:Name="ellForFork" Canvas.Bottom="33" Panel.ZIndex="25" Canvas.Left="180"
                      Width="50" Height="50" Fill="Yellow"></Ellipse>
-            <local:Cannon x:Name="gun" Canvas.Bottom="-10" Canvas.Left="50" Width="200" Height="150"></local:Cannon>
+            <local:Cannon x:Name="gun" Canvas.Bottom="-10" Canvas.Left="160" Width="200" Height="150"></local:Cannon>
             <!-- KENNY -->
             <Rectangle x:Name="ell" Width="60" Height="40" 
                      Canvas.Right="{Binding Path=Start, 
@@ -104,6 +104,7 @@
                     <ImageBrush ImageSource="Images/Kenny.png"></ImageBrush>
                 </Rectangle.Fill>
             </Rectangle>
+            <!-- SUN -->
             <Ellipse Width="138" Height="141" Name="sun" Panel.ZIndex="-33" Canvas.Top="10" Canvas.Left="20" 
                      Stretch="Uniform" RenderTransformOrigin="0.54,0.492">
                 <Ellipse.Fill>
@@ -257,9 +258,9 @@
                                 <Storyboard x:Name="storyFork">
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="fork" 
                                                                    Storyboard.TargetProperty="(Canvas.Bottom)" >
-                                        <SplineDoubleKeyFrame KeyTime="0:0:8" Value="70" 
+                                        <SplineDoubleKeyFrame KeyTime="0:0:7" Value="70" 
                                                               KeySpline="0.4,0.1 0.8,0.5"></SplineDoubleKeyFrame>
-                                        <SplineDoubleKeyFrame KeyTime="0:0:11" Value="-200" 
+                                        <SplineDoubleKeyFrame KeyTime="0:0:8" Value="-200" 
                                                               KeySpline="0.25,0.8 0.2,0.4"></SplineDoubleKeyFrame>
                                     </DoubleAnimationUsingKeyFrames>
                                 </Storyboard>
