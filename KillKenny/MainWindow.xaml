@@ -139,7 +139,7 @@
             <Label x:Name="lbHit" Panel.ZIndex="30" Foreground="DarkGoldenrod" FontSize="30" Content="5 Points"
                    Canvas.Bottom="10" Canvas.Right="150"></Label>
             <!-- Back sound -->
-            <MediaElement Source="Media\kk.wav" Name="myMediaElement" 
+            <MediaElement Source="Media\SLOT_they_kill_kenny.wav" Name="myMediaElement" 
                           Volume="0.05"
                           LoadedBehavior="Manual"/>
             <!-- Mounts -->

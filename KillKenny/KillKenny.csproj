@@ -116,10 +116,10 @@
     <Resource Include="Images\Kenny.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\kk2.gif" />
-    <Content Include="Media\kk.wav">
+    <Content Include="Media\SLOT_they_kill_kenny.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\kk2.gif" />
     <Content Include="Media\crash.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
