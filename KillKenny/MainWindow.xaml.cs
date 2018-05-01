@@ -138,7 +138,7 @@ namespace KillKenny
         #endregion
 
         /// <summary>
-        /// Calculate fork intersect
+        /// Сalculates the intersection with the fork
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -152,9 +152,9 @@ namespace KillKenny
             Rect r2 = t2.TransformBounds(new Rect() { X = 0, Y = 0, Width = ellForFork.ActualWidth,
                 Height = ellForFork.ActualHeight });
             res = r1.IntersectsWith(r2);
-            if (res)
+            if (res) // if intersected
             {
-                // calculate points game
+                // set points in the game
                 resultGame = resultGame - ((countHitToGoal <= 0) ? 1 : countHitToGoal - 1);
                 lbHit.Foreground = new LinearGradientBrush(Colors.BlueViolet, Colors.Red, 50.0);
                 lbHit.Content = "" + resultGame.ToString() + " Points";
@@ -167,6 +167,11 @@ namespace KillKenny
             }
         }
 
+        /// <summary>
+        /// Сalculates a random fork position on the field
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StoryFork_Completed(object sender, EventArgs e)
         {
             Random r = new Random();
@@ -175,6 +180,11 @@ namespace KillKenny
             storyFork.Begin();
         }
 
+        /// <summary>
+        /// Sets the random position of the Kenny on the field
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StoryboardEllipse_Completed(object sender, EventArgs e)
         {
             ImageBrush ib = new ImageBrush();
@@ -227,14 +237,13 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Draws the path of the kernel
+        /// Calculates 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void KernelTimer_Tick(object sender, EventArgs e)
         {
-
-            if (Canvas.GetBottom(ell) < 0)
+            if (Canvas.GetBottom(ell) < 0) // set kenny image in 'Ellipse'
             {
                 ImageBrush ib = new ImageBrush();
                 ib.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/Kenny.png",
@@ -242,15 +251,14 @@ namespace KillKenny
                 ell.Fill = ib;
                 ell.Visibility = Visibility.Visible;
             }
-            if (Kernel.V >= 10.0)
+            if (Kernel.V >= 10.0) // if power > 10 => reduce power cannon
             {
                 Kernel.V = Kernel.V - 0.5;
                 pb.Value = pb.Value - 0.5;
                 lbShow.Content = "Cannon power: " + Kernel.V.ToString();
             }
-            if (ker != null)
+            if (ker != null) // removes the kernel if it > one on the field
             {
-
                 if (Canvas.GetLeft(ker) > this.ActualWidth && Canvas.GetTop(ker) > this.ActualHeight)
                 {
                     for (int i = 0; i < MainCanvas.Children.Count; i++)
@@ -262,7 +270,7 @@ namespace KillKenny
                     }
                 }
             }
-            if (ell.Fill.ToString().Trim() == "#FFFF0000")
+            if (ell.Fill.ToString().Trim() == "#FFFF0000") // if kenny = 'red' (kenny is killed)
             {
                 ell.Effect = null;
                 ell.Visibility = Visibility.Hidden;
@@ -281,7 +289,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Reduce cannon power
+        /// Reduces the power of the cannon (gun)
         /// </summary>
         private void SpeedDownRunCommand_Execute()
         {
@@ -301,7 +309,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Rise cannon power
+        /// Increases the power of the cannon
         /// </summary>
         private void SpeedUpRunCommand_Execute()
         {
@@ -314,7 +322,7 @@ namespace KillKenny
         /// </summary>
         private void FireRunCommand_Execute()
         {
-            for (int i = 0; i < MainCanvas.Children.Count; i++)
+            for (int i = 0; i < MainCanvas.Children.Count; i++) // removes all the kernels on the field
             {
                 if (MainCanvas.Children[i] is Kernel)
                 {
@@ -322,24 +330,24 @@ namespace KillKenny
                 }
             }
 
-            kernelTimer.Start();
+            kernelTimer.Start(); // start timer
             Vector offset = VisualTreeHelper.GetOffset(gun);
             double x = offset.X + 100;
             double y = offset.Y + 85;
-            ker = new Kernel();
+            ker = new Kernel(); // create kernel
             ker.Agr = gun.AngleCannon;
             ker.X = x;
             ker.Y = y;
-            ker.Intersect += Ker_Intersect;
-            ker.MoveKernel += Ker_MoveKernel;
+            ker.Intersect += Ker_Intersect; // enables event (kernel intersecting)
+            ker.MoveKernel += Ker_MoveKernel; // enables event (kernel positions)
             Canvas.SetTop(ker, y);
             Canvas.SetLeft(ker, x);
-            MainCanvas.Children.Add(ker);
-            ker.Start();
+            MainCanvas.Children.Add(ker); // add kernel to the canvas
+            ker.Start(); // enable dispatcher (calculate kernel path)
             lbShow.Content = " x: " + x + " y: " + y;
             try
             {
-                SoundPlayer sp = new SoundPlayer();
+                SoundPlayer sp = new SoundPlayer(); // enable the sound of a shot
                 sp.SoundLocation = Environment.CurrentDirectory + @"\Media\gun8.wav";
                 sp.Load();
                 sp.Play();
@@ -352,7 +360,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Draws kernel path
+        /// Set behavior when hit by a target
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -369,7 +377,7 @@ namespace KillKenny
                 Rect r2 = t2.TransformBounds(new Rect() { X = 0, Y = 0, Width = ell.ActualWidth,
                     Height = ell.ActualHeight });
                 result = r1.IntersectsWith(r2);
-                if (result)
+                if (result) // if hit to goal
                 {
                     ell.Fill = new SolidColorBrush(Colors.Red);
                     BlurEffect b = new BlurEffect();
@@ -395,7 +403,11 @@ namespace KillKenny
             }
         }
 
-
+        /// <summary>
+        /// Сapture the position of the mouse on the canvas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Ker_MoveKernel(object sender, PositionEventArgs e)
         {
             Point position = Mouse.GetPosition(MainCanvas);
@@ -412,17 +424,28 @@ namespace KillKenny
             --gun.AngleCannon;
         }
 
+        /// <summary>
+        /// Sets the gun angle limit
+        /// </summary>
+        /// <returns></returns>
         private bool UpRunCommand_CanExecute()
         {
             if (gun.AngleCannon >= -55) return true;
             else return false;
         }
 
+        /// <summary>
+        /// Increases the angle of the gun
+        /// </summary>
         private void DownRunCommand_Executed()
         {
             ++gun.AngleCannon;
         }
 
+        /// <summary>
+        /// Sets the gun angle limit
+        /// </summary>
+        /// <returns></returns>
         private bool DownRunCommand_CanExecute()
         {
             if (gun.AngleCannon <= 30) return true;
@@ -430,7 +453,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Run cartman right
+        /// Move to the right
         /// </summary>
         private void RightRunCommand_Executed()
         {
@@ -442,7 +465,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Animation cartman
+        /// Cartman`s annimation
         /// </summary>
         private void RunCartman()
         {
@@ -458,7 +481,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Limit running cartman
+        /// Limit of the movement to the right
         /// </summary>
         /// <returns></returns>
         private bool RightRunCommand_CanExecute()
@@ -467,6 +490,10 @@ namespace KillKenny
             else return false;
         }
 
+        /// <summary>
+        /// Limit of the movement to the left
+        /// </summary>
+        /// <returns></returns>
         private bool LeftRunCommand_CanExecute()
         {
             RunCartman();
@@ -475,7 +502,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Run cartman left
+        /// Move to the left
         /// </summary>
         private void LeftRunCommand_Executed()
         {

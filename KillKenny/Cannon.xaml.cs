@@ -15,7 +15,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// For cannon angle
+        /// Gun tilt angle
         /// </summary>
         public int AngleCannon
         {
@@ -28,7 +28,7 @@ namespace KillKenny
             DependencyProperty.Register("AngleCannon", typeof(int), typeof(Cannon), new PropertyMetadata(0));
 
         /// <summary>
-        /// For animation cartman
+        /// Position of the Cartman on a top canvas
         /// </summary>
         public double CartmanRun
         {

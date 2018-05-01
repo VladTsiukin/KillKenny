@@ -4,7 +4,7 @@
 namespace KillKenny
 {
     /// <summary>
-    /// For calculating position kernel on canvas
+    /// For calculation of a position of a kernel on a canvas
     /// </summary>
     public class PositionEventArgs : EventArgs
     {

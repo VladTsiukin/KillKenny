@@ -34,7 +34,7 @@ namespace KillKenny
         private double t = 0;
 
         // speed
-        public static double V = 10;
+        public static double V = 10; // cannon power depends on it
 
         private static bool check = true;
 
@@ -71,7 +71,7 @@ namespace KillKenny
         #endregion
 
         /// <summary>
-        /// Event intersect with kernel
+        /// Event - intersect with kernel
         /// </summary>
         public event RoutedPropertyChangedEventHandler<double> Intersect
         {
@@ -80,7 +80,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Event handling mouse position
+        /// Event handling of a position of a mouse on a canvas
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -92,7 +92,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Event handling position kernel on canvas
+        /// Event handling of a position of a kernel on a canvas
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -105,7 +105,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Event handling intersect with kernel
+        /// Event handling - intersect with kernel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -128,7 +128,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Calculate path kernel (the flight body thrown at an angle to the horizontal)
+        /// Calculates kernel path (The body thrown at an angle to the horizon.)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -144,7 +144,7 @@ namespace KillKenny
         }
 
         /// <summary>
-        /// Calculate cannon angle 
+        /// Calculates cannon angle 
         /// </summary>
         private double AngleGunRadian
         {
